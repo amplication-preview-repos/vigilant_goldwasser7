@@ -1,8 +1,27 @@
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DB_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
+}
+
+model ConsumedComment {
+  consumedPost   ConsumedPost? @relation(fields: [consumedPostId], references: [id])
+  consumedPostId String?       @db.ObjectId
+  content        String?
+  createdAt      DateTime      @default(now())
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt      DateTime      @updatedAt
+}
+
+model ConsumedPost {
+  consumedComments ConsumedComment[]
+  content          String?
+  createdAt        DateTime          @default(now())
+  id               String            @id @default(auto()) @map("_id") @db.ObjectId
+  publishedDate    DateTime?
+  title            String?
+  updatedAt        DateTime          @updatedAt
 }

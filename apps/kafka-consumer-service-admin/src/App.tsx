@@ -5,6 +5,14 @@ import { theme } from "./theme/theme";
 import Login from "./Login";
 import "./App.scss";
 import Dashboard from "./pages/Dashboard";
+import { ConsumedCommentList } from "./consumedComment/ConsumedCommentList";
+import { ConsumedCommentCreate } from "./consumedComment/ConsumedCommentCreate";
+import { ConsumedCommentEdit } from "./consumedComment/ConsumedCommentEdit";
+import { ConsumedCommentShow } from "./consumedComment/ConsumedCommentShow";
+import { ConsumedPostList } from "./consumedPost/ConsumedPostList";
+import { ConsumedPostCreate } from "./consumedPost/ConsumedPostCreate";
+import { ConsumedPostEdit } from "./consumedPost/ConsumedPostEdit";
+import { ConsumedPostShow } from "./consumedPost/ConsumedPostShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -30,7 +38,22 @@ const App = (): React.ReactElement => {
         theme={theme}
         dashboard={Dashboard}
         loginPage={Login}
-      ></Admin>
+      >
+        <Resource
+          name="ConsumedComment"
+          list={ConsumedCommentList}
+          edit={ConsumedCommentEdit}
+          create={ConsumedCommentCreate}
+          show={ConsumedCommentShow}
+        />
+        <Resource
+          name="ConsumedPost"
+          list={ConsumedPostList}
+          edit={ConsumedPostEdit}
+          create={ConsumedPostCreate}
+          show={ConsumedPostShow}
+        />
+      </Admin>
     </div>
   );
 };
